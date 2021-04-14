@@ -34,8 +34,8 @@ namespace VizeOdev
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.DataSource = tablo;
-            tablo.Columns.Add("Döviz Kodu", typeof(float));
-            tablo.Columns.Add("Birim", typeof(string));
+            tablo.Columns.Add("Döviz Kodu", typeof(string));
+            tablo.Columns.Add("Birim", typeof(float));
             tablo.Columns.Add("Döviz Cinsi", typeof(string));
             tablo.Columns.Add("Döviz Alış", typeof(float));
             tablo.Columns.Add("Döviz Satış", typeof(float));
@@ -46,13 +46,18 @@ namespace VizeOdev
             string exchangeRate = "http://www.tcmb.gov.tr/kurlar/today.xml";
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(exchangeRate);
-            string usd = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / BanknoteBuying").InnerXml;
-            string usd2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / ForexBuying").InnerXml;
+            string usd = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / Isim").InnerXml;
+            string usd2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / Unit").InnerXml;
+            string usd3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / CurrencyName").InnerXml;
+            string usd4 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / ForexBuying").InnerXml;
+            string usd5 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / ForexSelling").InnerXml;
+            string usd6 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / BanknoteBuying").InnerXml;
+            string usd7 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / BanknoteSelling").InnerXml;
+            
 
-            // dataGridView1.Columns[0].Name = "Recipe";
-            // tablo.Columns.Add(usd);
-            //tablo.Columns.Add(usd2);
-            usd = tablo.Columns[0].ToString();
+            tablo.Rows.Add(usd,usd2,usd3,usd4,usd5,usd6,usd7); 
+           
+            //usd = tablo.Columns[0].ToString();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
