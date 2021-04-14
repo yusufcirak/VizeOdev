@@ -36,21 +36,24 @@ namespace VizeOdev
         {
 
 
+
             dataGridView1.DataSource = tablo;
             tablo.Columns.Add("Döviz Kodu", typeof(string));
-            tablo.Columns.Add("Birim", typeof(float));
+            tablo.Columns.Add("Birim", typeof(double));
             tablo.Columns.Add("Döviz Cinsi", typeof(string));
-            tablo.Columns.Add("Döviz Alış", typeof(float));
-            tablo.Columns.Add("Döviz Satış", typeof(float));
-            tablo.Columns.Add("Efektif Alış", typeof(float));
-            tablo.Columns.Add("Efektif Satış", typeof(float));
+            tablo.Columns.Add("Döviz Alış", typeof(double));
+            tablo.Columns.Add("Döviz Satış", typeof(double));
+            tablo.Columns.Add("Efektif Alış", typeof(double));
+            tablo.Columns.Add("Efektif Satış", typeof(double));
 
 
             string exchangeRate = "http://www.tcmb.gov.tr/kurlar/today.xml";
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(exchangeRate);
 
-           
+            //   string tarih= xmlDoc.SelectSingleNode("Tarih_Date").InnerXml;
+            //  label1.Text = tarih;
+
             string usd = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / Isim").InnerXml;
             string usd2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / Unit").InnerXml;
             string usd3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='USD'] / CurrencyName").InnerXml;
@@ -66,7 +69,7 @@ namespace VizeOdev
             string aud5 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='AUD'] / ForexSelling").InnerXml;
             string aud6 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='AUD'] / BanknoteBuying").InnerXml;
             string aud7 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='AUD'] / BanknoteSelling").InnerXml;
-          
+
             string dkk = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='DKK'] / Isim").InnerXml;
             string dkk2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='DKK'] / Unit").InnerXml;
             string dkk3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='DKK'] / CurrencyName").InnerXml;
@@ -74,7 +77,7 @@ namespace VizeOdev
             string dkk5 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='DKK'] / ForexSelling").InnerXml;
             string dkk6 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='DKK'] / BanknoteBuying").InnerXml;
             string dkk7 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='DKK'] / BanknoteSelling").InnerXml;
-            
+
             string EUR = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='EUR'] / Isim").InnerXml;
             string EUR2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='EUR'] / Unit").InnerXml;
             string EUR3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='EUR'] / CurrencyName").InnerXml;
@@ -82,7 +85,7 @@ namespace VizeOdev
             string EUR5 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='EUR'] / ForexSelling").InnerXml;
             string EUR6 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='EUR'] / BanknoteBuying").InnerXml;
             string EUR7 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='EUR'] / BanknoteSelling").InnerXml;
-            
+
             string GBP = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='GBP'] / Isim").InnerXml;
             string GBP2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='GBP'] / Unit").InnerXml;
             string GBP3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='GBP'] / CurrencyName").InnerXml;
@@ -98,7 +101,7 @@ namespace VizeOdev
             string CHF5 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='CHF'] / ForexSelling").InnerXml;
             string CHF6 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='CHF'] / BanknoteBuying").InnerXml;
             string CHF7 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='CHF'] / BanknoteSelling").InnerXml;
-           
+
             string SEK = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SEK'] / Isim").InnerXml;
             string SEK2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SEK'] / Unit").InnerXml;
             string SEK3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SEK'] / CurrencyName").InnerXml;
@@ -106,7 +109,7 @@ namespace VizeOdev
             string SEK5 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SEK'] / ForexSelling").InnerXml;
             string SEK6 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SEK'] / BanknoteBuying").InnerXml;
             string SEK7 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SEK'] / BanknoteSelling").InnerXml;
-            
+
             string CAD = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='CAD'] / Isim").InnerXml;
             string CAD2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='CAD'] / Unit").InnerXml;
             string CAD3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='CAD'] / CurrencyName").InnerXml;
@@ -122,7 +125,7 @@ namespace VizeOdev
             string KWD5 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='KWD'] / ForexSelling").InnerXml;
             string KWD6 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='KWD'] / BanknoteBuying").InnerXml;
             string KWD7 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='KWD'] / BanknoteSelling").InnerXml;
-            
+
             string NOK = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='NOK'] / Isim").InnerXml;
             string NOK2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='NOK'] / Unit").InnerXml;
             string NOK3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='NOK'] / CurrencyName").InnerXml;
@@ -130,7 +133,7 @@ namespace VizeOdev
             string NOK5 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='NOK'] / ForexSelling").InnerXml;
             string NOK6 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='NOK'] / BanknoteBuying").InnerXml;
             string NOK7 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='NOK'] / BanknoteSelling").InnerXml;
-          
+
             string SAR = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SAR'] / Isim").InnerXml;
             string SAR2 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SAR'] / Unit").InnerXml;
             string SAR3 = xmlDoc.SelectSingleNode("Tarih_Date / Currency[@Kod ='SAR'] / CurrencyName").InnerXml;
@@ -162,9 +165,16 @@ namespace VizeOdev
             tablo.Rows.Add(JPY, JPY2, JPY3, JPY4, JPY5, JPY6, JPY7);
 
             //usd = tablo.Columns[0].ToString();
+
+
+
+           
+
+
+
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
 
@@ -197,15 +207,15 @@ namespace VizeOdev
                     TextWriter txt = new StreamWriter(dosyakaydet.FileName);
                     foreach (DataGridViewColumn srg in veriTablosu.Columns)
                     {
-                        txt.Write(srg.HeaderText + "    ");
+                        txt.Write(srg.HeaderText + ";");
                     }
                     txt.Write("\n");
                     foreach (DataGridViewRow satir in veriTablosu.Rows)
                     {
                         foreach (DataGridViewCell hucre in satir.Cells)
                         {
-                            
-                            txt.Write(hucre.Value + "   ");
+
+                            txt.Write(hucre.Value + ";");
 
                         }
                         txt.Write("\n");
@@ -213,11 +223,16 @@ namespace VizeOdev
 
                     }
                     txt.Close();
-                    MessageBox.Show("TXT dosyası başarıyla oluşturuldu!\n" + "Dosya Konumu: " + dosyakaydet.FileName);
+                    MessageBox.Show("Yeni Döviz Kurları Kaydedildi!\n" + "Dosya Konumu: " + dosyakaydet.FileName);
                 }
+
+
+
+
 
             }
 
         }
+
     }
 }
