@@ -149,14 +149,14 @@ class txtAktar
                 TextWriter txt = new StreamWriter(dosyakaydet.FileName);
                 foreach (DataGridViewColumn sutun in veriTablosu.Columns)
                 {
-                    txt.Write(sutun.HeaderText + "    ");
+                    txt.Write(sutun.HeaderText + ";");
                 }
                 txt.Write("\n");
                 foreach (DataGridViewRow satir in veriTablosu.Rows)
                 {
                     foreach (DataGridViewCell hucre in satir.Cells)
                     {
-                        txt.Write(hucre.Value.ToString() + "     ");
+                        txt.Write(hucre.Value.ToString() + ";");
                     }
                     txt.Write("\n");
                 }
