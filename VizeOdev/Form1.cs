@@ -16,26 +16,27 @@ namespace VizeOdev
 
 
 
-    public partial class Form1 : Form
+public partial class Form1 : Form
     {
         DataTable tablo = new DataTable();
+       
         public Form1()
         {
             InitializeComponent();
-
-
+                      
 
         }
 
-
-
-
-
-
+           
+        public string dakkasaat;
         private void Form1_Load(object sender, EventArgs e)
         {
 
 
+            label5.Text=("Veriler Hergün Saat 15:00'da Kayıt Edilecektir."+ "\n"+ "Lütfen Kayıt İşlemi Sırasında Kayıt Yerini Seçiniz...");
+
+            timer1.Enabled = true;
+            timer1.Start();
 
             dataGridView1.DataSource = tablo;
             tablo.Columns.Add("Döviz Cins", typeof(string));
@@ -50,8 +51,7 @@ namespace VizeOdev
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(exchangeRate);
 
-            //   string tarih= xmlDoc.SelectSingleNode("Tarih_Date").InnerXml;
-            //  label1.Text = tarih;
+           
             
             string metal = xmlDoc.SelectSingleNode("IGE/IGE_GUN/gun").InnerXml;
             string metal1 = "TL";
@@ -77,11 +77,16 @@ namespace VizeOdev
             tablo.Rows.Add(metal12, metal13, metal14, metal15, metal16);
             ;
 
-       
-
 
 
            
+
+
+
+
+
+
+
 
 
 
@@ -101,50 +106,67 @@ namespace VizeOdev
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            txtAktar.txtKaydet(dataGridView1);
+           
 
         }
 
-
-
-        public class txtAktar
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            public static void txtKaydet(DataGridView veriTablosu)
+            string daksaat = DateTime.Now.Minute.ToString();
+            string saat = DateTime.Now.Hour.ToString();
+            dakkasaat = saat + ":" + daksaat;
+            label3.Text = dakkasaat;
+
+            if (dakkasaat == "15:0")
             {
-                SaveFileDialog dosyakaydet = new SaveFileDialog();
-                dosyakaydet.FileName = "Döviz Kurları";
-                dosyakaydet.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();
-                dosyakaydet.Filter = "Txt Dosyası|*.txt";
-                if (dosyakaydet.ShowDialog() == DialogResult.OK)
-                {
-                    TextWriter txt = new StreamWriter(dosyakaydet.FileName);
-                    foreach (DataGridViewColumn srg in veriTablosu.Columns)
-                    {
-                        txt.Write(srg.HeaderText + ";");
-                    }
-                    txt.Write("\n");
-                    foreach (DataGridViewRow satir in veriTablosu.Rows)
-                    {
-                        foreach (DataGridViewCell hucre in satir.Cells)
-                        {
-
-                            txt.Write(hucre.Value + ";");
-
-                        }
-                        txt.Write("\n");
 
 
-                    }
-                    txt.Close();
-                    MessageBox.Show("Yeni Döviz Kurları Kaydedildi!\n" + "Dosya Konumu: " + dosyakaydet.FileName);
-                }
+                timer1.Enabled = false;
+                txtAktar.txtKaydet(dataGridView1);
 
 
+
+                
 
 
 
             }
-
+        }
+    }
+}
+class txtAktar
+{
+    public static void txtKaydet(DataGridView veriTablosu)
+    {
+        try
+        {
+            SaveFileDialog dosyakaydet = new SaveFileDialog();
+            dosyakaydet.FileName = "Metal Guncel Fiyat";
+            dosyakaydet.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();
+            dosyakaydet.Filter = "Txt Dosyası|*.txt";
+            if (dosyakaydet.ShowDialog() == DialogResult.OK)
+            {
+                TextWriter txt = new StreamWriter(dosyakaydet.FileName);
+                foreach (DataGridViewColumn sutun in veriTablosu.Columns)
+                {
+                    txt.Write(sutun.HeaderText + "    ");
+                }
+                txt.Write("\n");
+                foreach (DataGridViewRow satir in veriTablosu.Rows)
+                {
+                    foreach (DataGridViewCell hucre in satir.Cells)
+                    {
+                        txt.Write(hucre.Value.ToString() + "     ");
+                    }
+                    txt.Write("\n");
+                }
+                txt.Close();
+                MessageBox.Show("TXT dosyası başarıyla oluşturuldu!\n" + "Dosya Konumu: " + dosyakaydet.FileName, "İşlem Tamam");
+            }
+        }
+        catch (Exception hata)
+        {
+            MessageBox.Show(hata.Message);
         }
 
     }
